@@ -30,22 +30,52 @@ p = site.find_all('p')
 #for copy in copys:
 #    print(copy.text)
 
-teste = ''
+cep = ''
 razao = ''
+data = ''
+capitalSocial = ''
+contato = ''
+email=''
+socio = []
+
 for x in p:
     y = x.text
-    print(y)
     if 'CEP' in y :
-        print('aqui ta o cep genio ')
-        teste = y[4:14]
-        print(teste)
+        cep = y[4:14]
     if 'Razão Social' in y :
-        print('aqui ta a razao social genio ')
         razao = y[13:-19]
-        print(y)
+    if 'Data da Abertura' in y :
+        data = y[17:28]
+    if 'Capital Social' in y :
+        capitalSocial = y[16:-21]
+    if 'E-mail' in y:
+        email = y[8:-36]
+    if 'Telefone' in y :
+        contato = y[14:29]
+    if 'Sócio' in y:
+        socio.append(y)
+
+divs = site.find_all('div', attrs={'class': 'col c12'})
+cnae = []
+for div in divs:
+    print(div.text)
+    if 'Principal' in div:
+        cnae.append(div.text)
+
+
     
-print(teste)  
-print(razao)  
+    
+print(cep)  
+print(razao)
+print(data)
+print(capitalSocial)
+print(contato)
+print(email)
+print(socio[0])
+print(cnae)
+
+
+
 """
 data = {
     "cnpj": copys[0].text,
